@@ -50,7 +50,8 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
   ],
   providers: [
     SdrPaginationService,
-    SdrValidationService
+    SdrValidationService,
+    SdrResourceService
   ]
 })
 export class NgxSdrToolsModule { 
