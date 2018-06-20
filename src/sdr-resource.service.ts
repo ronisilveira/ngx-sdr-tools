@@ -1,9 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/empty';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { PageDef } from './page-def';
 import { SdrPaginationService } from './sdr-pagination.service';
@@ -104,7 +102,7 @@ export class SdrResourceService {
   private handleValidationError(error) {
     if (error.status === 400) {
       this.validationService.addErrors(error.error)
-      return Observable.empty();
+      return of([]);
     } else {
       return Observable.throw(error);  
     }  
@@ -113,24 +111,24 @@ export class SdrResourceService {
   public post(obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri;
-    return this.http.post(uri, obj).catch(error => this.handleValidationError(error));
+    return this.http.post(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public put(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.put(uri, obj).catch(error => this.handleValidationError(error));
+    return this.http.put(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public patch(id: string, obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri + "/" + id;
-    return this.http.patch(uri, obj).catch(error => this.handleValidationError(error));
+    return this.http.patch(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public delete(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.delete(uri).catch(error => this.handleValidationError(error));
+    return this.http.delete(uri).pipe(catchError(err => this.handleValidationError(err)));
   }
 }
