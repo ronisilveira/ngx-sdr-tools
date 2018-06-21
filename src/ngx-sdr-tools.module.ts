@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -47,18 +47,11 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
     FieldValidationDirective,
     ErrorMessageDirective,
     ShowOnErrorDirective
+  ],
+  providers: [
+    SdrPaginationService,
+    SdrValidationService,
+    SdrResourceService
   ]
 })
-export class NgxSdrToolsModule {
-
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: NgxSdrToolsModule,
-      providers: [
-        SdrPaginationService,
-        SdrValidationService,
-        SdrResourceService
-      ]
-    }
-  }
-}
+export class NgxSdrToolsModule {}
