@@ -23,9 +23,9 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
     HttpClientModule
   ],
   declarations: [
-    FirstPageDirective, 
-    LastPageDirective, 
-    PriorPageDirective, 
+    FirstPageDirective,
+    LastPageDirective,
+    PriorPageDirective,
     NextPageDirective,
     ForEachPageDirective,
     PageDirective,
@@ -36,9 +36,9 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
     ShowOnErrorDirective
   ],
   exports: [
-    FirstPageDirective, 
-    LastPageDirective, 
-    PriorPageDirective, 
+    FirstPageDirective,
+    LastPageDirective,
+    PriorPageDirective,
     NextPageDirective,
     ForEachPageDirective,
     PageDirective,
@@ -47,19 +47,16 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
     FieldValidationDirective,
     ErrorMessageDirective,
     ShowOnErrorDirective
-  ],
-  providers: [
-    SdrPaginationService,
-    SdrValidationService,
-    SdrResourceService
   ]
 })
-export class NgxSdrToolsModule { 
+export class NgxSdrToolsModule {
 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: NgxSdrToolsModule,
       providers: [
+        SdrPaginationService,
+        SdrValidationService,
         SdrResourceService
       ]
     }
