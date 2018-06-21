@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -54,4 +54,14 @@ import { ShowOnErrorDirective } from './show-on-error.directive';
     SdrResourceService
   ]
 })
-export class NgxSdrToolsModule {}
+export class NgxSdrToolsModule { 
+
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: NgxSdrToolsModule,
+      providers: [
+        SdrResourceService
+      ]
+    }
+  }
+}
