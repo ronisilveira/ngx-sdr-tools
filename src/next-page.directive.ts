@@ -24,5 +24,7 @@ export class NextPageDirective implements OnInit {
   onClick() {
     if (this.pageDef.number < this.pageDef.totalPages - 1)
       this.resourceService.gotoPage(this.pageDef.number + 1);
+
+    return false;
   }
 }

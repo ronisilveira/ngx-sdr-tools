@@ -17,5 +17,7 @@ export class SortByDirective {
   @HostListener('click')
   onClick() {
     this.resourceService.sortBy(this.fieldSort);
+
+    return false;
   }
 }

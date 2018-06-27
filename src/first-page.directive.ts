@@ -24,5 +24,7 @@ export class FirstPageDirective implements OnInit {
   onClick() {
     if (this.pageDef.number != 0)
       this.resourceService.gotoPage(0);
+
+    return false;
   }
 }

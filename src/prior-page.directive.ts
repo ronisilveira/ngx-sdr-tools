@@ -24,5 +24,7 @@ export class PriorPageDirective implements OnInit {
   onClick() {
     if (this.pageDef.number > 0)
       this.resourceService.gotoPage(this.pageDef.number - 1);
-  }
+
+      return false;
+    }
 }

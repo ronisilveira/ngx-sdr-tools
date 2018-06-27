@@ -27,5 +27,7 @@ export class PageDirective implements OnInit {
   onClick() {
     if (this.pageDef == null || this.pageDef.number != this.pageNumber - 1)
       this.resourceService.gotoPage(this.pageNumber - 1);
+
+    return false;
   }
 }
