@@ -100,12 +100,11 @@ export class SdrResourceService {
   }
 
   private handleValidationError(error) {
-    if (error.status === 400) {
-      this.validationService.addErrors(error.error)
-      return of([]);
-    } else {
-      return Observable.throw(error);  
-    }  
+    
+    if (error.status === 400)
+      this.validationService.addErrors(error.error);
+
+    return Observable.throw(error);
   }
 
   public post(obj: any): Observable<any> {
