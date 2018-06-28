@@ -16,11 +16,9 @@ export class ShowOnErrorDirective implements OnInit {
 
   ngOnInit(): void {
     this.validationService.errorEmitter.subscribe(errors => {
-      if (errors.has(this.sdrFieldValidation.sdrFieldValidation)) {
+      this.container.clear();
+      if (errors.has(this.sdrFieldValidation.sdrFieldValidation))
         this.container.createEmbeddedView(this.template);
-      } else {
-        this.container.clear();
-      }
     });
   }
 }

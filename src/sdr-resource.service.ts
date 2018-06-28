@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { PageDef } from './page-def';
@@ -100,11 +100,11 @@ export class SdrResourceService {
   }
 
   private handleValidationError(error) {
-    
+
     if (error.status === 400)
       this.validationService.addErrors(error.error);
 
-    return Observable.throw(error);
+    return throwError(error);
   }
 
   public post(obj: any): Observable<any> {
