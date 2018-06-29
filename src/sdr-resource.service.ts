@@ -54,8 +54,13 @@ export class SdrResourceService {
     });
 
     this.http.get(serachUri).subscribe(response => {
-      this.resultEmitter.emit(response['_embedded'][this.uri]);
-      this.paginationService.changePagination(response['page']);
+      if (response['_embedded'] != null) {
+        this.resultEmitter.emit(response['_embedded'][this.uri]);
+        this.paginationService.changePagination(response['page']);
+      } else {
+        this.resultEmitter.emit([response]);
+        this.paginationService.changePagination({ size: 20, totalElements: 1, totalPages: 1, number: 0 });
+      }
     });
 
     this.lastSearch = search;
