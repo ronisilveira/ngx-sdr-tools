@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -104,10 +104,10 @@ export class SdrResourceService {
     return this.http.get(uri);
   }
 
-  private handleValidationError(error) {
+  private handleValidationError(error: HttpErrorResponse) {
 
     console.log(error);
-    
+
     if (error.status === 400)
       this.validationService.addErrors(error.error);
 
@@ -117,24 +117,24 @@ export class SdrResourceService {
   public post(obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri;
-    return this.http.post(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
+    return this.http.post(uri, obj).pipe(catchError(this.handleValidationError));
   }
 
   public put(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.put(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
+    return this.http.put(uri, obj).pipe(catchError(this.handleValidationError));
   }
 
   public patch(id: string, obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri + "/" + id;
-    return this.http.patch(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
+    return this.http.patch(uri, obj).pipe(catchError(this.handleValidationError));
   }
 
   public delete(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.delete(uri).pipe(catchError(err => this.handleValidationError(err)));
+    return this.http.delete(uri).pipe(catchError(this.handleValidationError));
   }
 }
