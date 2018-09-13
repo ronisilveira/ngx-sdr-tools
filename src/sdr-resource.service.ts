@@ -106,6 +106,8 @@ export class SdrResourceService {
 
   private handleValidationError(error) {
 
+    console.log(error);
+    
     if (error.status === 400)
       this.validationService.addErrors(error.error);
 
