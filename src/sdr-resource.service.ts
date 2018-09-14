@@ -106,8 +106,6 @@ export class SdrResourceService {
 
   private handleValidationError(error: HttpErrorResponse) {
 
-    console.log(error);
-
     if (error.status === 400)
       this.validationService.addErrors(error.error);
 
@@ -117,24 +115,24 @@ export class SdrResourceService {
   public post(obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri;
-    return this.http.post(uri, obj).pipe(catchError(this.handleValidationError));
+    return this.http.post(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public put(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.put(uri, obj).pipe(catchError(this.handleValidationError));
+    return this.http.put(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public patch(id: string, obj: any): Observable<any> {
 
     let uri = this.baseUri + this.uri + "/" + id;
-    return this.http.patch(uri, obj).pipe(catchError(this.handleValidationError));
+    return this.http.patch(uri, obj).pipe(catchError(err => this.handleValidationError(err)));
   }
 
   public delete(obj: any): Observable<any> {
 
     let uri = obj._links.self.href;
-    return this.http.delete(uri).pipe(catchError(this.handleValidationError));
+    return this.http.delete(uri).pipe(catchError(err => this.handleValidationError(err)));
   }
 }
