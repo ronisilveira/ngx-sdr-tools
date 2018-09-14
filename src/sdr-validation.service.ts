@@ -12,7 +12,7 @@ export class SdrValidationService {
   addErrors(error: any) {
 
     this.errors.clear();
-    error.errors.forEach(err => this.errors.set(err.property, err.message));
+    error.errors.forEach(err => this.errors.set(err.property || err.field, err.message || err.defaultMessage));
     this.errorEmitter.emit(this.errors);
   }
 }
